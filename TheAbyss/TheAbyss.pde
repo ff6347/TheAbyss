@@ -1,10 +1,15 @@
 /**
  * The Abyss
  * 2012
+ * works in P2.* only the Fog class does not
+ * see http://wiki.processing.org/w/Advanced_OpenGL for updates
+ *
+ * fabiantheblind
  */
 
 import processing.opengl.*;
 import java.lang.reflect.*;
+import java.util.Iterator;
 
 // Fog and backdrop could be integrated in the creaturemanager... 
 // but it's also ok to keep the "decorations" outside of it.
@@ -13,9 +18,9 @@ CreatureManager creatureManager;
 boolean useBackdrop = false;
 
 void setup() {
-  size(screenWidth, screenHeight, OPENGL);  
-  hint(ENABLE_OPENGL_4X_SMOOTH);
-  hint(DISABLE_OPENGL_ERROR_REPORT); 
+  size(displayWidth, displayHeight, OPENGL);  
+  //  hint(ENABLE_OPENGL_4X_SMOOTH);
+  //  hint(DISABLE_OPENGL_ERROR_REPORT); 
   frameRate(60);
   creatureManager = new CreatureManager(this);
   fog = new Fog(this, 800, 2000, color(0, 40, 60));
@@ -55,29 +60,35 @@ void keyPressed() {
   else if (key == 's')       capture();
 }
 
-void drawBackdrop(){
+void drawBackdrop() {
   pushMatrix();
   noStroke();
   translate(width/2, height/2);
   rotateZ(sin(frameCount*0.001)*TWO_PI);
-    
-  float h = dist(0,0,width,height);
-  float b1 = map(sin(frameCount*0.013),-1,1,0,1);
-  float b2 = map(sin(frameCount*0.017),-1,1,0,1);    
-  float b3 = map(sin(frameCount*0.019),-1,1,0,1);
-    
+
+  float h = dist(0, 0, width, height);
+  float b1 = map(sin(frameCount*0.013), -1, 1, 0, 1);
+  float b2 = map(sin(frameCount*0.017), -1, 1, 0, 1);    
+  float b3 = map(sin(frameCount*0.019), -1, 1, 0, 1);
+
   beginShape(QUAD_STRIP);
-  fill(0, b1*40, b1*60); vertex(-h, -h);
-  fill(0, b1*40, b1*60); vertex( h, -h);
-  fill(0, b2*40, b2*60); vertex(-h,  0);
-  fill(0, b2*40, b2*60); vertex( h,  0);
-  fill(0, b3*40, b3*60); vertex(-h,  h);
-  fill(0, b3*40, b3*60); vertex( h,  h);
+  fill(0, b1*40, b1*60); 
+  vertex(-h, -h);
+  fill(0, b1*40, b1*60); 
+  vertex( h, -h);
+  fill(0, b2*40, b2*60); 
+  vertex(-h, 0);
+  fill(0, b2*40, b2*60); 
+  vertex( h, 0);
+  fill(0, b3*40, b3*60); 
+  vertex(-h, h);
+  fill(0, b3*40, b3*60); 
+  vertex( h, h);
   endShape();
   popMatrix();
 }
 
-void capture(){
-   saveFrame("snap_" + System.currentTimeMillis() + ".png"); 
+void capture() {
+  saveFrame("snap_" + System.currentTimeMillis() + ".png");
 }
 

@@ -59,10 +59,10 @@ class Fog {
   }
   
   void noFog() {
-    PGraphicsOpenGL pgl = (PGraphicsOpenGL) parent.g;
-    GL gl = pgl.beginGL();
-    gl.glDisable(GL.GL_FOG); 
-    pgl.endGL();
+//    PGraphicsOpenGL pgl = (PGraphicsOpenGL) parent.g;
+//    GL gl = pgl.beginGL();
+//    gl.glDisable(GL.GL_FOG); 
+//    pgl.endGL();
   }
 
   void fog(float near, float far, color col) {
@@ -72,14 +72,14 @@ class Fog {
     fogColor[2] = blue(col)  / 255.0;
     fogColor[3] = alpha(col) / 255.0;  
 
-    PGraphicsOpenGL pgl = (PGraphicsOpenGL) parent.g;
-    GL gl = pgl.beginGL();
-    gl.glEnable(GL.GL_FOG); 
-    gl.glFogi(GL.GL_FOG_MODE, GL.GL_LINEAR);
-    gl.glFogf(GL.GL_FOG_START, near);
-    gl.glFogf(GL.GL_FOG_END, far);
-    gl.glFogfv(GL.GL_FOG_COLOR, FloatBuffer.wrap(fogColor)); 
-    gl.glHint(GL.GL_FOG_HINT, GL.GL_NICEST);
-    pgl.endGL();
+//    PGraphicsOpenGL pgl = (PGraphicsOpenGL) parent.g;
+//    GL gl = pgl.beginGL();
+//    gl.glEnable(GL.GL_FOG); 
+//    gl.glFogi(GL.GL_FOG_MODE, GL.GL_LINEAR);
+//    gl.glFogf(GL.GL_FOG_START, near);
+//    gl.glFogf(GL.GL_FOG_END, far);
+//    gl.glFogfv(GL.GL_FOG_COLOR, FloatBuffer.wrap(fogColor)); 
+//    gl.glHint(GL.GL_FOG_HINT, GL.GL_NICEST);
+//    pgl.endGL();
   }
 }
